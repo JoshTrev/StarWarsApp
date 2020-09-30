@@ -6,7 +6,7 @@ var path = require("path");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000; //Fallback option if does not have process.env.PORT (Dynamic port since theres options)
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +42,8 @@ var characters = [
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function(req, res) {
+// The "/" could also be a "*"
+app.get("/", function(req, res) { 
   res.sendFile(path.join(__dirname, "view.html"));
 });
 
